@@ -1,0 +1,23 @@
+package com.example.formulairetp;
+
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
+
+import java.util.List;
+
+@Dao
+public interface UserDao {
+
+    @Insert
+    long insert(Entite user);
+
+    @Query("SELECT * FROM users ORDER BY createdAt DESC")
+    List<Entite> getAll();
+
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    Entite findByEmail(String email);
+
+    @Query("DELETE FROM users")
+    void clear();
+}
